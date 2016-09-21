@@ -94,10 +94,15 @@ m_dmrBeacons(false),
 m_dmrId(0U),
 m_dmrColorCode(2U),
 m_dmrSelfOnly(false),
+<<<<<<< HEAD
 m_TGRewriteSlot1(false),
 m_TGRewriteSlot2(false),
 m_BMAutoRewrite(false),
 m_BMRewriteReflectorVoicePrompts(false),
+=======
+m_dmrTGRewriteSlot1(false),
+m_dmrTGRewriteSlot2(false),
+>>>>>>> upstream/master
 m_dmrPrefixes(),
 m_dmrBlackList(),
 m_dmrDstIdBlacklistSlot1RF(),
@@ -336,6 +341,13 @@ bool CConf::read()
 			m_dmrColorCode = (unsigned int)::atoi(value);
 		else if (::strcmp(key, "SelfOnly") == 0)
 			m_dmrSelfOnly = ::atoi(value) == 1;
+<<<<<<< HEAD
+=======
+		else if (::strcmp(key, "TGRewriteSlot1") == 0)
+			m_dmrTGRewriteSlot1 = ::atoi(value) == 1;
+		else if (::strcmp(key, "TGRewriteSlot2") == 0)
+			m_dmrTGRewriteSlot2 = ::atoi(value) == 1;
+>>>>>>> upstream/master
 		else if (::strcmp(key, "Prefixes") == 0) {
 			char* p = ::strtok(value, ",\r\n");
 			while (p != NULL) {
@@ -765,12 +777,12 @@ bool CConf::getDMRSelfOnly() const
 
 bool CConf::getDMRTGRewriteSlot1() const
 {
-	return m_TGRewriteSlot1;
+	return m_dmrTGRewriteSlot1;
 }
 
 bool CConf::getDMRTGRewriteSlot2() const
 {
-	return m_TGRewriteSlot2;
+	return m_dmrTGRewriteSlot2;
 }
 
 bool CConf::getDMRBMAutoRewrite() const

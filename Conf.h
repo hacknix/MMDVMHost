@@ -217,11 +217,16 @@ private:
   unsigned int m_dmrId;
   unsigned int m_dmrColorCode;
   bool         m_dmrSelfOnly;
+<<<<<<< HEAD
   bool	       m_TGRewriteSlot1;
   bool	       m_TGRewriteSlot2;
   bool	       m_BMAutoRewrite;
   bool	       m_BMRewriteReflectorVoicePrompts;
   
+=======
+  bool	       m_dmrTGRewriteSlot1;
+  bool	       m_dmrTGRewriteSlot2;
+>>>>>>> upstream/master
   std::vector<unsigned int> m_dmrPrefixes;
   std::vector<unsigned int> m_dmrBlackList;
   std::vector<unsigned int> m_dmrDstIdBlacklistSlot1RF;
