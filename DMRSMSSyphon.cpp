@@ -30,8 +30,8 @@
 #include <stdio.h>
 #include <string.h>
 
-int m_fd;
-std::string m_syphonFIFO;
+int DMRSMSSyphon::m_fd;
+std::string DMRSMSSyphon::m_syphonFIFO;
 
 //using namespace std;
 
@@ -40,20 +40,23 @@ bool DMRSMSSyphon::init(std::string syphonFIFO)
   m_syphonFIFO = syphonFIFO;
   int fd;
   
-  mkfifo(syphonFIFO.c_str(), 0600); 
+  mkfifo(syphonFIFO.c_str(), 0666); 
+  LogMessage("DMRSMSSyphon: opening FIFO, blocking until reader attached...");
   fd = open(syphonFIFO.c_str(), O_WRONLY ); //open(myfifo, O_WRONLY | O_NONBLOCK);
   if (fd == -1) {
      LogError("DMRSMSSyphon: Cannot open fifo %s",syphonFIFO.c_str());
      return false;
+  }
   m_fd = fd;
- } 
-  
+//write(fd,"syphon online",sizeof("syphon online")); 
+ return true; 
 };
 
-void DMRSMSSyphon::write(unsigned char *data)
+void DMRSMSSyphon::sywrite(const unsigned char* data)
 {
     int fd = m_fd;
-    ::write(fd,data,sizeof(data));
+    write(fd,data,sizeof(data));
+    write(fd,"\0",sizeof("\0\0\0\0\0\0\0"));
 }
 
 void DMRSMSSyphon::close()

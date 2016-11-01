@@ -19,7 +19,6 @@
 
 
 #include <string>
-#include <string>
 #include <sys/types.h>
 #include <sys/select.h>
 #include <errno.h>
@@ -35,11 +34,12 @@
 class DMRSMSSyphon {
 public:
       static bool init(std::string syphonFIFO);
-      static void write(unsigned char *data);
+      static void sywrite(const unsigned char* data);
       static void close();
   
 private:
       static int m_fd;
       static std::string m_syphonFIFO;
+      static int main();
   
 };

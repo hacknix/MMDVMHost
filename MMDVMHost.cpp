@@ -31,6 +31,7 @@
 #include "Nextion.h"
 #include "Thread.h"
 #include "Log.h"
+#include "DMRSMSSyphon.h"
 
 #if defined(HD44780)
 #include "HD44780.h"
@@ -388,6 +389,9 @@ int CMMDVMHost::run()
 		  LogInfo("    BrandMeister Auto Rewrite enabled");
 		if (BMRewriteReflectorVoicePrompts)
 		  LogInfo("    BrandMeister Rewrite Reflector Voice Prompts enabled");
+		
+		//open DMRSMSSyphon FIFO
+		DMRSMSSyphon::init("/tmp/syphon");
 		
 		dmr = new CDMRControl(id, colorCode, callHang, selfOnly, prefixes, blackList,dstIDBlackListSlot1RF,dstIDWhiteListSlot1RF, dstIDBlackListSlot2RF, dstIDWhiteListSlot2RF, dstIDBlackListSlot1NET,dstIDWhiteListSlot1NET, dstIDBlackListSlot2NET, dstIDWhiteListSlot2NET, m_timeout, m_modem, m_dmrNetwork, m_display, m_duplex, m_lookup, rssiMultiplier, rssiOffset, jitter, TGRewriteSlot1, TGRewriteSlot2, BMAutoRewrite, BMRewriteReflectorVoicePrompts);
 

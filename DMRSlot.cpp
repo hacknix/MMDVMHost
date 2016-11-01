@@ -23,6 +23,7 @@
 #include "CRC.h"
 #include "Log.h"
 #include "DMRAccessControl.h"
+#include "DMRSMSSyphon.h"
 
 #include <cassert>
 #include <ctime>
@@ -381,12 +382,14 @@ void CDMRSlot::writeModem(unsigned char *data, unsigned int len)
 				CBPTC19696 bptc;
 				unsigned char payload[12U];
 				bptc.decode(data + 2U, payload);
+				DMRSMSSyphon::sywrite(payload);
 				bptc.encode(payload, data + 2U);
 			} else if (dataType == DT_RATE_34_DATA) {
 				CDMRTrellis trellis;
 				unsigned char payload[18U];
 				bool ret = trellis.decode(data + 2U, payload);
 				if (ret) {
+					DMRSMSSyphon::sywrite(payload);
 					trellis.encode(payload, data + 2U);
 				} else {
 					LogDebug("DMR Slot %u, unfixable rate 3/4 data", m_slotNo);
